@@ -18,7 +18,7 @@ class Config {
         static let ShowLogo = true
         
         // Change to false if the language toggle in the top right should not be displayed
-        static let ShowLanguageToggle = true
+        static let ShowLanguageToggle = false
         
         // Time in seconds for when to reset back to the main screen
         static let Timeout = 30.0
@@ -26,10 +26,10 @@ class Config {
     
     class Colour {
         // Colour of the navigation bar
-        static let NavigationBar = 0xB71C1C
+        static let NavigationBar = 0x007c00
         
         // Colour of the background
-        static let Background = 0xB71C1C
+        static let Background = 0x007c00
     }
     
     class Slack {
