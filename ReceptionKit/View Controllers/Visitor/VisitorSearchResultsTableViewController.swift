@@ -38,7 +38,7 @@ class VisitorSearchResultsTableViewController: ReturnToHomeTableViewController {
 
         let contact = searchResults![indexPath.row]
         cell.contactNameLabel.text = contact.name
-        cell.contactPhoneLabel.text = formatPhoneString(contact.phones)
+//        cell.contactPhoneLabel.text = formatPhoneString(contact.phones)
         
         if (contact.picture != nil) {
             cell.contactImage.image = contact.picture

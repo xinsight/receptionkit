@@ -8,6 +8,9 @@
 
 // From Rudolf Adamkovic
 // http://stackoverflow.com/questions/24263007/how-to-use-hex-colour-values-in-swift-ios
+
+import UIKit
+
 extension UIColor {
     convenience init(hex: Int) {
         let components = (

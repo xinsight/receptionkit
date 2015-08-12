@@ -8,10 +8,10 @@
 
 class Config {
     
-    class SupportKit {
-        // Replace the token with App Token you get from app.supportkit.io
-        static let AppToken = "eurqdnoj2xjppgfbh51zs2v89"
-    }
+//    class SupportKit {
+//        // Replace the token with App Token you get from app.supportkit.io
+//        static let AppToken = "eurqdnoj2xjppgfbh51zs2v89"
+//    }
     
     class General {
         // Change to false if the logo at the top should not show
@@ -32,7 +32,12 @@ class Config {
         static let Background = 0xB71C1C
     }
     
-    class Slack {
+    struct Slack {
+
+        let TOKEN = "xoxp-2336072268-2747645885-9036602146-8bcc6f";
+
+        let CHANNEL = "Receptionist";
+        
         // Name of the receptionist that appears in Slack
         static let Name = "Receptionist"
         

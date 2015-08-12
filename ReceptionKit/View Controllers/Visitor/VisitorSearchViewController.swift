@@ -23,7 +23,6 @@ class VisitorSearchViewController: ReturnToHomeViewController, UITextFieldDelega
         // Do any additional setup after loading the view.
         nameTextField.delegate = self
         nameTextField.borderStyle = UITextBorderStyle.RoundedRect
-        nameTextField.placeholder = Text.get("wizard of oz")
         lookingForLabel.text = Text.get("looking for")
     }
     
@@ -39,7 +38,10 @@ class VisitorSearchViewController: ReturnToHomeViewController, UITextFieldDelega
     //
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        searchResults = Contact.search(nameTextField.text)
+        
+        if let text = nameTextField?.text {
+            searchResults = Contact.search(text)
+        }
 
         // Check if the person the visitor is searching for exists
         if searchResults.count > 0 {
