@@ -10,45 +10,91 @@ import Foundation
 import UIKit
 //import AddressBook
 
-class ContactPhone {
-    var type: String
-    var number: String
-    
-    init(type: String, number: String) {
-        self.type = type
-        self.number = number
-    }
-    
-    func isWorkPhone() -> Bool {
-        return self.type == "_$!<Work>!$_"
-    }
-    
-    func isMobilePhone() -> Bool {
-        return self.type == "_$!<Mobile>!$_"
+//class ContactPhone {
+//    var type: String
+//    var number: String
+//    
+//    init(type: String, number: String) {
+//        self.type = type
+//        self.number = number
+//    }
+//    
+//    func isWorkPhone() -> Bool {
+//        return self.type == "_$!<Work>!$_"
+//    }
+//    
+//    func isMobilePhone() -> Bool {
+//        return self.type == "_$!<Mobile>!$_"
+//    }
+//}
+
+class Contacts {
+    var contacts:[Contact]
+    init() {
+        self.contacts = []()
     }
 }
 
 class Contact {
     
-    var name: String
-//    var phones: [ContactPhone]
+    var name: String // Bob Smith
+    var username: String // @slack
     var picture: UIImage?
-    var avatar_url: String?
+    var avatarUrl: NSURL?
     
-    init(name: String, picture: UIImage?) {
+    init(name: String, username: String, avatarUrl:NSURL?) {
         self.name = name
-        self.picture = picture
+        self.username = username
     }
 
-    static func downloadSlackContacts() {
+    
+    static func downloadSlackContacts(completionHandler: ([Contact]) -> Void) -> Void {
 
-        let url = NSURL("https://slack.com/api/users.list?token=xoxp-2336072268-2747645885-9036602146-8bcc6f")
-        let request = NSURLRequest(url);
+        let contact = Contact(name:"Bo Boo", username:"boboo", avatarUrl:NSURL(string:"http://foo.com/foo.jpg"))
+        var contacts = [Contact]()
+        contacts.append(contact)
+
+        let url = NSURL(string:"https://slack.com/api/users.list?token=xoxp-2336072268-2747645885-9036602146-8bcc6f")
+//        let request = NSURLRequest(url);
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithURL(url!, completionHandler:{
+            (data, response, error) -> Void in
+            
+//            var err:NSError?
+//            let dict = NSJSONSerialization.JSONObjectWithData(data, options:nil, error:&err) as NSDictionary
+            do {
+                let dict = try NSJSONSerialization.JSONObjectWithData(data!, options:.AllowFragments) as! NSDictionary
+                
+                for member:NSDictionary in dict["members"] as! Array {
+                    
+                    let deleted = member["deleted"] as! Bool
+                    if (deleted) {
+                        continue
+                    }
+
+                    let profile = member["profile"] as! NSDictionary
+                    let name = profile["real_name"] as! String
+                    let username = member["name"] as! String
+                    let avatarUrl = NSURL(string:profile["image_48"] as! String)
+                    
+                    let contact = Contact(name: name, username: username, avatarUrl: avatarUrl)
+                    print("name: \(name) \(username)")
+                    contacts.append(contact)
+                    
+                    // TODO: sort
+                }
+                
+                completionHandler(contacts)
+                
+            } catch {
+                print("error parsing json")
+            }
+            
+            
+        })
+        
+        task.resume()
  
-        NSURLSession
-        
-        
-        
     }
     
     // Check to see if the user has granted the address book permission, ask for permission if not
@@ -72,7 +118,7 @@ class Contact {
     
     // Search for all contacts that match a name
     static func search(name: String) -> [Contact] {
-        var contacts = [Contact]()
+        let contacts = [Contact]()
 
         // TODO:
         

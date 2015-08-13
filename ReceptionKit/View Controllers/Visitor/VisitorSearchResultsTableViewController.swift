@@ -62,38 +62,38 @@ class VisitorSearchResultsTableViewController: ReturnToHomeTableViewController {
     }
     
     // Take the phone numbers and create a descriptive string for it
-    func formatPhoneString(phones: [ContactPhone]) -> String {
-        var workPhones = [ContactPhone]()
-        var mobilePhones = [ContactPhone]()
-        
-        var formattedString = ""
-        
-        for phone in phones {
-            if phone.isWorkPhone() == true {
-                workPhones.append(phone)
-            } else if phone.isMobilePhone() == true {
-                mobilePhones.append(phone)
-            }
-        }
-        
-        for workPhone in workPhones {
-            if (formattedString != "") {
-                formattedString += "\t\t"
-            }
-            formattedString += "Work: " + workPhone.number
-        }
-        for mobilePhone in mobilePhones {
-            if (formattedString != "") {
-                formattedString += "\t\t"
-            }
-            formattedString += "Mobile: " + mobilePhone.number
-        }
-        
-        if formattedString == "" {
-            return "No contact info"
-        } else {
-            return formattedString
-        }
-    }
+//    func formatPhoneString(phones: [ContactPhone]) -> String {
+//        var workPhones = [ContactPhone]()
+//        var mobilePhones = [ContactPhone]()
+//        
+//        var formattedString = ""
+//        
+//        for phone in phones {
+//            if phone.isWorkPhone() == true {
+//                workPhones.append(phone)
+//            } else if phone.isMobilePhone() == true {
+//                mobilePhones.append(phone)
+//            }
+//        }
+//        
+//        for workPhone in workPhones {
+//            if (formattedString != "") {
+//                formattedString += "\t\t"
+//            }
+//            formattedString += "Work: " + workPhone.number
+//        }
+//        for mobilePhone in mobilePhones {
+//            if (formattedString != "") {
+//                formattedString += "\t\t"
+//            }
+//            formattedString += "Mobile: " + mobilePhone.number
+//        }
+//        
+//        if formattedString == "" {
+//            return "No contact info"
+//        } else {
+//            return formattedString
+//        }
+//    }
 
 }
