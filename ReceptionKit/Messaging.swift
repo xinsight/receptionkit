@@ -25,7 +25,7 @@ class Messaging {
             "channel": Config.Slack.CHANNEL,
             "username": "receptionist",
             "link_names": "1", // makes @foo into a link (and notifies)
-            "text": "[test] \(message)", // FIXME:
+            "text": message,
             "icon_emoji": ":package:"
         ]
 
@@ -37,7 +37,7 @@ class Messaging {
             }
             
             let session = NSURLSession.sharedSession()
-            let task = session.downloadTaskWithRequest(request) { (url, response, error) -> Void in
+            let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
                 if (error != nil) {
                     print("Error: \(error)")
                 }
@@ -74,7 +74,7 @@ class Messaging {
             "channel": Config.Slack.CHANNEL,
             "username": "receptionist",
             "link_names": "1", // makes @foo into a link (and notifies)
-            "text": "[test] \(text)",
+            "text": text,
             "icon_emoji": ":phone:"
         ]
         
@@ -86,7 +86,7 @@ class Messaging {
             }
             
             let session = NSURLSession.sharedSession()
-            let task = session.downloadTaskWithRequest(request) { (url, response, error) -> Void in
+            let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
                 if (error != nil) {
                     print("Error: \(error)")
                 }

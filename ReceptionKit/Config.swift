@@ -9,8 +9,11 @@
 class Config {
     
     class General {
+        
+        static let Company = "Centre for Global eHealth Innovation"
+        
         // Change to false if the logo at the top should not show
-        static let ShowLogo = true
+        static let ShowLogo = false
         
         // Change to false if the language toggle in the top right should not be displayed
         static let ShowLanguageToggle = true
@@ -31,15 +34,9 @@ class Config {
 
         static let TOKEN = "xoxp-2336072268-2747645885-9036602146-8bcc6f";
 
-//        let CHANNEL = "Receptionist";
-        static let CHANNEL = "@jay";
+        static let CHANNEL = "#Receptionist";
+//        static let CHANNEL = "@jay";
         
-        // Name of the receptionist that appears in Slack
-//        static let Name = "Receptionist"
-        
-        // If you want a profile picture for the receptionist in Slack,
-        // set a Gravatar for an email and replace the following
-//        static let Email = "receptionist@example.com"
     }
     
 }

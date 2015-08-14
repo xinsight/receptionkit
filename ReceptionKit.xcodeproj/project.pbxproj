@@ -507,11 +507,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: University Health Network";
 				INFOPLIST_FILE = "$(SRCROOT)/ReceptionKit/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.MyCompany.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = ReceptionKit;
+				PROVISIONING_PROFILE = "f556f19a-21d6-4f6f-8ce8-ee50c399728f";
 				SWIFT_OBJC_BRIDGING_HEADER = "ReceptionKit/ReceptionKit-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -521,11 +522,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: University Health Network";
 				INFOPLIST_FILE = "$(SRCROOT)/ReceptionKit/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.MyCompany.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = ReceptionKit;
+				PROVISIONING_PROFILE = "f556f19a-21d6-4f6f-8ce8-ee50c399728f";
 				SWIFT_OBJC_BRIDGING_HEADER = "ReceptionKit/ReceptionKit-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 2;
 			};

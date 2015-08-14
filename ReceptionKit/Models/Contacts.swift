@@ -39,15 +39,18 @@ class Contacts {
                     let username = member["name"] as! String
                     let avatarUrl = NSURL(string:profile["image_72"] as! String)
                     
+                    if (name == "") {
+                        continue
+                    }
+                    
                     let contact = Contact(name: name, username: username, avatarUrl: avatarUrl)
                     contact.title = profile["title"] as? String
                     
                     self.items.append(contact)
                     
-                    // TODO: sort
                 }
                 
-                //completionHandler(contacts)
+                self.items = self.items.sort({$0.name < $1.name})
                 
             } catch {
                 print("error parsing json")

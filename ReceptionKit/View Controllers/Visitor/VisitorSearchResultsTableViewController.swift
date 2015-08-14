@@ -19,6 +19,10 @@ class VisitorSearchResultsTableViewController: ReturnToHomeTableViewController {
         
         // Overwrite the theme - table should be white
         self.view.backgroundColor = UIColor.whiteColor()
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        searchResults = appDelegate.contacts.items
+
     }
     
     //
