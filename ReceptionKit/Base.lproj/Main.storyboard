@@ -147,7 +147,7 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="The Wonderful Wizard of Oz" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Ol3-q4-HxX">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Ol3-q4-HxX">
                                 <rect key="frame" x="16" y="168" width="568" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="RNk-Kc-UUe"/>
@@ -181,7 +181,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mDu-fM-8Fz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1922" y="1915"/>
+            <point key="canvasLocation" x="2007" y="2176"/>
         </scene>
         <!--Visitor Search Results Table View Controller-->
         <scene sceneID="lBv-8K-TaT">
@@ -196,7 +196,7 @@
                                 <rect key="frame" x="0.0" y="22" width="600" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0YX-Ga-Tki" id="16j-6W-qcR">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="99.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="100"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="r9E-q8-YGT">
@@ -206,7 +206,13 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Awesome Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tCa-rS-9cT">
-                                            <rect key="frame" x="131" y="22" width="461" height="55"/>
+                                            <rect key="frame" x="131" y="22" width="461" height="25"/>
+                                            <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QXs-DG-f6f">
+                                            <rect key="frame" x="131" y="47" width="37" height="26"/>
                                             <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -215,7 +221,9 @@
                                     <constraints>
                                         <constraint firstItem="r9E-q8-YGT" firstAttribute="bottom" secondItem="16j-6W-qcR" secondAttribute="bottomMargin" id="Bfh-oU-det"/>
                                         <constraint firstItem="r9E-q8-YGT" firstAttribute="top" secondItem="16j-6W-qcR" secondAttribute="topMargin" id="Eqq-8P-Lq0"/>
-                                        <constraint firstItem="tCa-rS-9cT" firstAttribute="centerY" secondItem="r9E-q8-YGT" secondAttribute="centerY" id="W50-kR-cqc"/>
+                                        <constraint firstItem="QXs-DG-f6f" firstAttribute="leading" secondItem="tCa-rS-9cT" secondAttribute="leading" id="FTp-0s-xFY"/>
+                                        <constraint firstItem="QXs-DG-f6f" firstAttribute="top" secondItem="tCa-rS-9cT" secondAttribute="bottom" id="OTq-ke-NZz"/>
+                                        <constraint firstItem="tCa-rS-9cT" firstAttribute="centerY" secondItem="r9E-q8-YGT" secondAttribute="centerY" constant="-15" id="W50-kR-cqc"/>
                                         <constraint firstItem="tCa-rS-9cT" firstAttribute="leading" secondItem="r9E-q8-YGT" secondAttribute="trailing" constant="24" id="drO-oc-vzo"/>
                                         <constraint firstItem="r9E-q8-YGT" firstAttribute="leading" secondItem="16j-6W-qcR" secondAttribute="leadingMargin" constant="16" id="jqB-HL-wcL"/>
                                         <constraint firstItem="tCa-rS-9cT" firstAttribute="trailing" secondItem="16j-6W-qcR" secondAttribute="trailingMargin" id="mFQ-kK-nzY"/>
@@ -225,6 +233,7 @@
                                 <connections>
                                     <outlet property="contactImage" destination="r9E-q8-YGT" id="n1W-Rk-fb0"/>
                                     <outlet property="contactNameLabel" destination="tCa-rS-9cT" id="7pR-O2-hnp"/>
+                                    <outlet property="contactTitleLabel" destination="QXs-DG-f6f" id="r51-dl-BkS"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -468,8 +477,8 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Barack Obama" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="dbb-CH-MQ3">
-                                <rect key="frame" x="16" y="167" width="568" height="60"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="dbb-CH-MQ3">
+                                <rect key="frame" x="20" y="168" width="560" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="d7u-fz-Qya"/>
                                 </constraints>
@@ -516,6 +525,6 @@
         <image name="IconDeliveryUPS" width="400" height="400"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qXu-7C-vqp"/>
+        <segue reference="Uts-8T-2PH"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -8,11 +8,6 @@
 
 class Config {
     
-//    class SupportKit {
-//        // Replace the token with App Token you get from app.supportkit.io
-//        static let AppToken = "eurqdnoj2xjppgfbh51zs2v89"
-//    }
-    
     class General {
         // Change to false if the logo at the top should not show
         static let ShowLogo = true
@@ -26,25 +21,25 @@ class Config {
     
     class Colour {
         // Colour of the navigation bar
-        static let NavigationBar = 0xB71C1C
+        static let NavigationBar = 0x458FA8
         
         // Colour of the background
-        static let Background = 0xB71C1C
+        static let Background = NavigationBar
     }
     
     struct Slack {
 
-        let TOKEN = "xoxp-2336072268-2747645885-9036602146-8bcc6f";
+        static let TOKEN = "xoxp-2336072268-2747645885-9036602146-8bcc6f";
 
 //        let CHANNEL = "Receptionist";
-        let CHANNEL = "@jay";
+        static let CHANNEL = "@jay";
         
         // Name of the receptionist that appears in Slack
-        static let Name = "Receptionist"
+//        static let Name = "Receptionist"
         
         // If you want a profile picture for the receptionist in Slack,
         // set a Gravatar for an email and replace the following
-        static let Email = "receptionist@example.com"
+//        static let Email = "receptionist@example.com"
     }
     
 }

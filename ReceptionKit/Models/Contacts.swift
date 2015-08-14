@@ -18,7 +18,8 @@ class Contacts {
     func downloadSlackContacts() {
         // completionHandler: ([Contact]) -> Void) -> Void {
         
-        let url = NSURL(string:"https://slack.com/api/users.list?token=xoxp-2336072268-2747645885-9036602146-8bcc6f")
+        let urlString = "https://slack.com/api/users.list?token=\(Config.Slack.TOKEN)"
+        let url = NSURL(string:urlString)
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithURL(url!, completionHandler:{
             (data, response, error) -> Void in
@@ -39,7 +40,8 @@ class Contacts {
                     let avatarUrl = NSURL(string:profile["image_72"] as! String)
                     
                     let contact = Contact(name: name, username: username, avatarUrl: avatarUrl)
-                    print("name: \(name) \(username)")
+                    contact.title = profile["title"] as? String
+                    
                     self.items.append(contact)
                     
                     // TODO: sort
@@ -60,12 +62,13 @@ class Contacts {
     
 }
 
-class Contact {
+class Contact: CustomStringConvertible {
     
     var name: String // Bob Smith
     var username: String // @slack
     var picture: UIImage?
     var avatarUrl: NSURL?
+    var title: String? // profile["title"]
     
     init(name: String, username: String, avatarUrl:NSURL?) {
         self.name = name
@@ -73,8 +76,8 @@ class Contact {
         self.avatarUrl = avatarUrl
     }
 
-    func description() {
-        print("name:\(name) username:\(username)")
+    var description: String {
+        return "name:\(name) username:\(username) title:\(title)"
     }
     
     // Search for all contacts that match a name

@@ -38,6 +38,7 @@ class VisitorSearchResultsTableViewController: ReturnToHomeTableViewController {
 
         let contact = searchResults![indexPath.row]
         cell.contactNameLabel.text = contact.name
+        cell.contactTitleLabel.text = contact.title
         
         if (contact.picture != nil) {
             cell.contactImage.image = contact.picture
@@ -67,11 +68,9 @@ class VisitorSearchResultsTableViewController: ReturnToHomeTableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let contact = searchResults![indexPath.row]
-        if visitorName == nil || visitorName == "" {
-            sendMessage("Someone is at the reception looking for \(contact.name)!")
-        } else {
-            sendMessage("\(visitorName!) is at the reception looking for \(contact.name)!")
-        }
+        
+        Messaging.sendVisitorMessage(visitorName, contact: contact)
+        
         performSegueWithIdentifier("SelectedContact", sender: self)
     }
     

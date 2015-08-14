@@ -32,6 +32,7 @@
 		81E2AC881AE95BF4000D5F25 /* Contacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E2AC871AE95BF4000D5F25 /* Contacts.swift */; };
 		81E2AC8B1AE995EF000D5F25 /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E2AC8A1AE995EF000D5F25 /* ContactTableViewCell.swift */; };
 		81E2AC8E1AE9A447000D5F25 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E2AC8D1AE9A447000D5F25 /* Text.swift */; };
+		AE4DF0241B7E2F4F0088E367 /* Messaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4DF0231B7E2F4F0088E367 /* Messaging.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		81E2AC871AE95BF4000D5F25 /* Contacts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Contacts.swift; path = Models/Contacts.swift; sourceTree = "<group>"; };
 		81E2AC8A1AE995EF000D5F25 /* ContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactTableViewCell.swift; path = "View Controllers/Visitor/ContactTableViewCell.swift"; sourceTree = "<group>"; };
 		81E2AC8D1AE9A447000D5F25 /* Text.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Text.swift; path = Helpers/Text.swift; sourceTree = "<group>"; };
+		AE4DF0231B7E2F4F0088E367 /* Messaging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Messaging.swift; sourceTree = "<group>"; };
 		F87E92FD6D5CD480E978ED15 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -226,6 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				81E2AC871AE95BF4000D5F25 /* Contacts.swift */,
+				AE4DF0231B7E2F4F0088E367 /* Messaging.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 				631439931AF1BCDA00B7B757 /* Config.swift in Sources */,
 				81B4453D1AE9360400725576 /* DeliveryMethodViewController.swift in Sources */,
 				81E2AC821AE959FA000D5F25 /* VisitorSearchViewController.swift in Sources */,
+				AE4DF0241B7E2F4F0088E367 /* Messaging.swift in Sources */,
 				81E2AC881AE95BF4000D5F25 /* Contacts.swift in Sources */,
 				81E2AC801AE95843000D5F25 /* WaitingViewController.swift in Sources */,
 				81B4451B1AE9313900725576 /* AppDelegate.swift in Sources */,
