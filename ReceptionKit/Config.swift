@@ -21,7 +21,7 @@ class Config {
         static let ShowLanguageToggle = true
         
         // Time in seconds for when to reset back to the main screen
-        static let Timeout = 30.0
+        static let Timeout = 60.0
     }
     
     class Colour {
@@ -36,7 +36,8 @@ class Config {
 
         let TOKEN = "xoxp-2336072268-2747645885-9036602146-8bcc6f";
 
-        let CHANNEL = "Receptionist";
+//        let CHANNEL = "Receptionist";
+        let CHANNEL = "@jay";
         
         // Name of the receptionist that appears in Slack
         static let Name = "Receptionist"

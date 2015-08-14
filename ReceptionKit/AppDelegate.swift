@@ -13,13 +13,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    static let contacts = Contacts()
+    let contacts = Contacts()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
-        Contact.downloadSlackContacts({ (downloadedContacts:[Contact]) -> Void in
-            contacts.contacts += downloadedContacts
-        })
+        // FIXME: only proceed to next view when contacts are downloaded
+        contacts.downloadSlackContacts()
         
         // App-wide styles
         UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Slide)

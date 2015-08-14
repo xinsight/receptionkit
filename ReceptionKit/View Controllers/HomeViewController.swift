@@ -13,7 +13,7 @@ class HomeViewController: ThemedViewController {
     @IBOutlet weak var languageButton: UIBarButtonItem!
     @IBOutlet weak var deliveryButton: UIButton!
     @IBOutlet weak var visitorButton: UIButton!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

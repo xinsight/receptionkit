@@ -38,17 +38,22 @@ class VisitorSearchViewController: ReturnToHomeViewController, UITextFieldDelega
     //
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
+
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let contacts = appDelegate.contacts
         
-        if let text = nameTextField?.text {
-            searchResults = Contact.search(text)
-        }
+        searchResults = contacts.items
+
+//        if let text = nameTextField?.text {
+//            searchResults = Contact.search(text)
+//        }
 
         // Check if the person the visitor is searching for exists
-        if searchResults.count > 0 {
+//        if searchResults.count > 0 {
             performSegueWithIdentifier("VisitorNameSearchSegue", sender: self)
-        } else {
-            performSegueWithIdentifier("VisitorNameInvalidSearchSegue", sender: self)
-        }
+//        } else {
+//            performSegueWithIdentifier("VisitorNameInvalidSearchSegue", sender: self)
+//        }
         
         return false
     }
