@@ -19,7 +19,7 @@ class Config {
         static let ShowLanguageToggle = true
         
         // Time in seconds for when to reset back to the main screen
-        static let Timeout = 60.0
+        static let Timeout = 30.0
     }
     
     class Colour {

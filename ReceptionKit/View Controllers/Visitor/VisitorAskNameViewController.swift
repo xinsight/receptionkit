@@ -52,6 +52,7 @@ class VisitorAskNameViewController: ReturnToHomeViewController, UITextFieldDeleg
         if let visitorViewController = segue.destinationViewController as? VisitorViewController {
             visitorViewController.visitorName = nameTextField.text
         }
+        
     }
     
 }
