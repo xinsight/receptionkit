@@ -29,12 +29,12 @@ class DeliveryMethodViewController: ReturnToHomeViewController {
     
     @IBAction func signatureButtonTapped(sender: AnyObject) {
         shouldAskToWait = true
-        segueWithMessage(makeDeliveryFromText() + " requires a signature!")
+        segueWithMessage(makeDeliveryFromText() + " requires a signature! @channel")
     }
     
     @IBAction func leftReceptionButtonTapped(sender: AnyObject) {
         shouldAskToWait = false
-        segueWithMessage(makeDeliveryFromText() + " has been left at reception!")
+        segueWithMessage(makeDeliveryFromText() + " has been left at reception! @channel")
     }
     
     // Exclude the "from" if the delivery company is unknown
