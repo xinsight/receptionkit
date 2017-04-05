@@ -9,10 +9,4 @@
 #ifndef ReceptionKit_ReceptionKit_Bridging_Header_h
 #define ReceptionKit_ReceptionKit_Bridging_Header_h
 
-#import <SupportKit/SKTConversation.h>
-#import <SupportKit/SKTMessage.h>
-#import <SupportKit/SKTSettings.h>
-#import <SupportKit/SKTUser.h>
-#import <SupportKit/SupportKit.h>
-
 #endif

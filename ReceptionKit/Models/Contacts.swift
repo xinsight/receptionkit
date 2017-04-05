@@ -7,81 +7,87 @@
 //
 
 import Foundation
-import AddressBook
+import UIKit
 
-class ContactPhone {
-    var type: String
-    var number: String
-    
-    init(type: String, number: String) {
-        self.type = type
-        self.number = number
+class Contacts {
+    var items:[Contact]
+    init() {
+        self.items = [Contact]()
     }
     
-    func isWorkPhone() -> Bool {
-        return self.type == "_$!<Work>!$_"
+    func downloadSlackContacts() {
+        // completionHandler: ([Contact]) -> Void) -> Void {
+        
+        let urlString = "https://slack.com/api/users.list?token=\(Config.Slack.TOKEN)"
+        let url = NSURL(string:urlString)
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithURL(url!, completionHandler:{
+            (data, response, error) -> Void in
+            
+            do {
+                let dict = try NSJSONSerialization.JSONObjectWithData(data!, options:.AllowFragments) as! NSDictionary
+                
+                for member:NSDictionary in dict["members"] as! Array {
+                    
+                    let deleted = member["deleted"] as! Bool
+                    if (deleted) {
+                        continue
+                    }
+                    
+                    let profile = member["profile"] as! NSDictionary
+                    let name = profile["real_name"] as! String
+                    let username = member["name"] as! String
+                    let avatarUrl = NSURL(string:profile["image_72"] as! String)
+                    
+                    if (name == "") {
+                        continue
+                    }
+                    
+                    let contact = Contact(name: name, username: username, avatarUrl: avatarUrl)
+                    contact.title = profile["title"] as? String
+                    
+                    self.items.append(contact)
+                    
+                }
+                
+                self.items = self.items.sort({$0.name < $1.name})
+                
+            } catch {
+                print("error parsing json")
+            }
+            
+        })
+        
+        task.resume()
+        
     }
+
     
-    func isMobilePhone() -> Bool {
-        return self.type == "_$!<Mobile>!$_"
-    }
 }
 
-class Contact {
+class Contact: CustomStringConvertible {
     
-    var name: String
-    var phones: [ContactPhone]
+    var name: String // Bob Smith
+    var username: String // @slack
     var picture: UIImage?
+    var avatarUrl: NSURL?
+    var title: String? // profile["title"]
     
-    init(name: String, phones: [ContactPhone], picture: UIImage?) {
+    init(name: String, username: String, avatarUrl:NSURL?) {
         self.name = name
-        self.phones = phones
-        self.picture = picture
+        self.username = username
+        self.avatarUrl = avatarUrl
     }
-    
-    
-    // Check to see if the user has granted the address book permission, ask for permission if not
-    // Returns true if authorized, false if not
-    static func isAuthorized() -> Bool {
-        // Get the authorization if needed
-        let authStatus = ABAddressBookGetAuthorizationStatus()
-        if (authStatus == ABAuthorizationStatus.Denied ||
-            authStatus == ABAuthorizationStatus.Restricted) {
-                println("No permission to access the contacts")
-        } else if (authStatus == ABAuthorizationStatus.NotDetermined) {
-            ABAddressBookRequestAccessWithCompletion(nil) { (granted: Bool, error: CFError!) in
-                println("Successfully got permission for the contacts")
-            }
-        }
-        
-        // Need to refetch the status if it was updated
-        return ABAddressBookGetAuthorizationStatus() == ABAuthorizationStatus.Authorized
+
+    var description: String {
+        return "name:\(name) username:\(username) title:\(title)"
     }
-    
     
     // Search for all contacts that match a name
     static func search(name: String) -> [Contact] {
-        var contacts = [Contact]()
-        
-        if (isAuthorized()) {
-            let addressBook: ABAddressBook = ABAddressBookCreateWithOptions(nil, nil).takeUnretainedValue()
-            let query = name as CFString
-            let people = ABAddressBookCopyPeopleWithName(addressBook, query).takeRetainedValue() as Array
-            
-            for person:ABRecordRef in people {
-                let contactName: String = ABRecordCopyCompositeName(person).takeRetainedValue() as String
-                var contactPhoneNumbers = getPhoneNumbers(person, property: kABPersonPhoneProperty)
-                
-                let contactPictureDataOptional = ABPersonCopyImageData(person)
-                var contactPicture: UIImage?
-                if (contactPictureDataOptional != nil) {
-                    let contactPictureData = ABPersonCopyImageData(person).takeRetainedValue() as NSData
-                    contactPicture = UIImage(data: contactPictureData)
-                }
-                
-                contacts.append(Contact(name: contactName, phones: contactPhoneNumbers, picture: contactPicture))
-            }
-        }
+        let contacts = [Contact]()
+
+        // TODO:
 
         // Will return an empty array if not authorized
         return contacts
@@ -91,25 +97,6 @@ class Contact {
     //
     // Private functions
     //
-    
-    // Get a property from a ABPerson, returns an array of Strings that matches the value
-    static func getPhoneNumbers(person: ABRecordRef, property: ABPropertyID) -> [ContactPhone] {
-        var propertyValues = [ContactPhone]()
-        
-        let personProperty: ABMultiValueRef = ABRecordCopyValue(person, property).takeRetainedValue() as ABMultiValueRef
-        let personPropertyValues = ABMultiValueCopyArrayOfAllValues(personProperty) // Returns nil if empty
-
-        if (personPropertyValues != nil) {
-            let properties = personPropertyValues.takeUnretainedValue() as NSArray
-            for (index, property) in enumerate(properties) {
-                let propertyLabel = ABMultiValueCopyLabelAtIndex(personProperty, index).takeRetainedValue() as String
-                let propertyValue = property as! String
-                let phone = ContactPhone(type: propertyLabel, number: propertyValue)
-                propertyValues.append(phone)
-            }
-        }
-        return propertyValues
-    }
     
 }
 

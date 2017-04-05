@@ -13,13 +13,15 @@ class HomeViewController: ThemedViewController {
     @IBOutlet weak var languageButton: UIBarButtonItem!
     @IBOutlet weak var deliveryButton: UIButton!
     @IBOutlet weak var visitorButton: UIButton!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Set the logo if ShowLogo is enabled
         if (Config.General.ShowLogo) {
             navigationItem.titleView = UIImageView(image: UIImage(named: "CompanyLogo"))
+        } else {
+            navigationItem.title = Config.General.Company
         }
         
         // Hide the language toggle if ShowLanguageToggle is disabled

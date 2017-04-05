@@ -29,17 +29,17 @@ class DeliveryMethodViewController: ReturnToHomeViewController {
     
     @IBAction func signatureButtonTapped(sender: AnyObject) {
         shouldAskToWait = true
-        segueWithMessage(makeDeliveryFromText() + " that requires a signature!")
+        segueWithMessage(makeDeliveryFromText() + " requires a signature! @channel")
     }
     
     @IBAction func leftReceptionButtonTapped(sender: AnyObject) {
         shouldAskToWait = false
-        segueWithMessage(makeDeliveryFromText() + " that has been left at the reception!")
+        segueWithMessage(makeDeliveryFromText() + " has been left at reception! @channel")
     }
     
     // Exclude the "from" if the delivery company is unknown
     func makeDeliveryFromText() -> String {
-        var messageText = "There is a delivery"
+        var messageText = "A delivery"
         if deliveryCompany != "Other" {
             messageText += " from " + deliveryCompany!
         }
@@ -48,7 +48,9 @@ class DeliveryMethodViewController: ReturnToHomeViewController {
     
     // Segue to the thank you controller after sending a SupportKit message
     func segueWithMessage(message: String) {
-        sendMessage(message)
+        
+        Messaging.sendDeliveryMessage(message);
+        
         performSegueWithIdentifier("DeliveryMethodSelectedSegue", sender: self)
     }
 

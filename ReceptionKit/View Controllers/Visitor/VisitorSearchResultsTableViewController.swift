@@ -19,6 +19,10 @@ class VisitorSearchResultsTableViewController: ReturnToHomeTableViewController {
         
         // Overwrite the theme - table should be white
         self.view.backgroundColor = UIColor.whiteColor()
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        searchResults = appDelegate.contacts.items
+
     }
     
     //
@@ -38,11 +42,26 @@ class VisitorSearchResultsTableViewController: ReturnToHomeTableViewController {
 
         let contact = searchResults![indexPath.row]
         cell.contactNameLabel.text = contact.name
-        cell.contactPhoneLabel.text = formatPhoneString(contact.phones)
+        cell.contactTitleLabel.text = contact.title
         
         if (contact.picture != nil) {
             cell.contactImage.image = contact.picture
         } else {
+            
+            if let url = contact.avatarUrl {
+            
+                let session = NSURLSession.sharedSession()
+                let task = session.dataTaskWithURL(url, completionHandler: { (data, response, error) -> Void in
+                    if let _data = data {
+                        dispatch_async(dispatch_get_main_queue(), {
+                            cell.contactImage.image = UIImage(data:_data)
+                        })
+                    }
+                })
+                task.resume()
+                
+            }
+            
             cell.contactImage.image = UIImage(named: "UnknownContact")
         }
         cell.contactImage.layer.cornerRadius = 42.0
@@ -53,47 +72,11 @@ class VisitorSearchResultsTableViewController: ReturnToHomeTableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let contact = searchResults![indexPath.row]
-        if visitorName == nil || visitorName == "" {
-            sendMessage("Someone is at the reception looking for \(contact.name)!")
-        } else {
-            sendMessage("\(visitorName!) is at the reception looking for \(contact.name)!")
-        }
+        
+        Messaging.sendVisitorMessage(visitorName, contact: contact)
+        
         performSegueWithIdentifier("SelectedContact", sender: self)
     }
     
-    // Take the phone numbers and create a descriptive string for it
-    func formatPhoneString(phones: [ContactPhone]) -> String {
-        var workPhones = [ContactPhone]()
-        var mobilePhones = [ContactPhone]()
-        
-        var formattedString = ""
-        
-        for phone in phones {
-            if phone.isWorkPhone() == true {
-                workPhones.append(phone)
-            } else if phone.isMobilePhone() == true {
-                mobilePhones.append(phone)
-            }
-        }
-        
-        for workPhone in workPhones {
-            if (formattedString != "") {
-                formattedString += "\t\t"
-            }
-            formattedString += "Work: " + workPhone.number
-        }
-        for mobilePhone in mobilePhones {
-            if (formattedString != "") {
-                formattedString += "\t\t"
-            }
-            formattedString += "Mobile: " + mobilePhone.number
-        }
-        
-        if formattedString == "" {
-            return "No contact info"
-        } else {
-            return formattedString
-        }
-    }
 
 }
