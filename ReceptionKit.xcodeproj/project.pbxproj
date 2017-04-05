@@ -303,8 +303,9 @@
 				TargetAttributes = {
 					81B445141AE9313900725576 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = DZ4F62W4RY;
+						DevelopmentTeam = F663BTMH9Q;
 						LastSwiftMigration = 0820;
+						ProvisioningStyle = Manual;
 					};
 					81B445291AE9313900725576 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -515,10 +516,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = F663BTMH9Q;
 				INFOPLIST_FILE = "$(SRCROOT)/ReceptionKit/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.ehealthinnovation.receptionkit;
 				PRODUCT_NAME = ReceptionKit;
+				PROVISIONING_PROFILE = "6f47ac8a-efba-478d-8b72-24a3fffe4c46";
+				PROVISIONING_PROFILE_SPECIFIER = "Centre In-House Distribution Profile (iOS8)";
 				SWIFT_OBJC_BRIDGING_HEADER = "ReceptionKit/ReceptionKit-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -530,10 +535,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = F663BTMH9Q;
 				INFOPLIST_FILE = "$(SRCROOT)/ReceptionKit/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.ehealthinnovation.receptionkit;
 				PRODUCT_NAME = ReceptionKit;
+				PROVISIONING_PROFILE = "6f47ac8a-efba-478d-8b72-24a3fffe4c46";
+				PROVISIONING_PROFILE_SPECIFIER = "Centre In-House Distribution Profile (iOS8)";
 				SWIFT_OBJC_BRIDGING_HEADER = "ReceptionKit/ReceptionKit-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 2;
