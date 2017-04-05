@@ -18,8 +18,8 @@ class DeliveryMethodViewController: ReturnToHomeViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        signatureButton.setTitle(Text.get("signature"), forState: UIControlState.Normal)
-        leftReceptionButton.setTitle(Text.get("left at reception"), forState: UIControlState.Normal)
+        signatureButton.setTitle(Text.get("signature"), for: UIControlState())
+        leftReceptionButton.setTitle(Text.get("left at reception"), for: UIControlState())
     }
 
 
@@ -27,12 +27,12 @@ class DeliveryMethodViewController: ReturnToHomeViewController {
     // Delivery method buttons
     //
     
-    @IBAction func signatureButtonTapped(sender: AnyObject) {
+    @IBAction func signatureButtonTapped(_ sender: AnyObject) {
         shouldAskToWait = true
         segueWithMessage(makeDeliveryFromText() + " requires a signature! @channel")
     }
     
-    @IBAction func leftReceptionButtonTapped(sender: AnyObject) {
+    @IBAction func leftReceptionButtonTapped(_ sender: AnyObject) {
         shouldAskToWait = false
         segueWithMessage(makeDeliveryFromText() + " has been left at reception! @channel")
     }
@@ -47,11 +47,11 @@ class DeliveryMethodViewController: ReturnToHomeViewController {
     }
     
     // Segue to the thank you controller after sending a SupportKit message
-    func segueWithMessage(message: String) {
+    func segueWithMessage(_ message: String) {
         
         Messaging.sendDeliveryMessage(message);
         
-        performSegueWithIdentifier("DeliveryMethodSelectedSegue", sender: self)
+        performSegue(withIdentifier: "DeliveryMethodSelectedSegue", sender: self)
     }
 
     
@@ -60,10 +60,10 @@ class DeliveryMethodViewController: ReturnToHomeViewController {
     //
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        if let waitingViewController = segue.destinationViewController as? WaitingViewController {
+        if let waitingViewController = segue.destination as? WaitingViewController {
             waitingViewController.shouldAskToWait = shouldAskToWait
         }
     }

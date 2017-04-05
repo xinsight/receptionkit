@@ -16,10 +16,10 @@ class WaitingViewController: ReturnToHomeViewController {
     @IBOutlet weak var thankYouLabel: UILabel!
     @IBOutlet weak var thankYouMessageText: UITextView!
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        thankYouMessageText.selectable = true
+        thankYouMessageText.isSelectable = true
         if (shouldAskToWait) {
             thankYouLabel.text = Text.get("please wait")
             thankYouMessageText.text = Text.get("please wait message")
@@ -27,7 +27,7 @@ class WaitingViewController: ReturnToHomeViewController {
             thankYouLabel.text = Text.get("thank you")
             thankYouMessageText.text = Text.get("nice day")
         }
-        thankYouMessageText.selectable = false
+        thankYouMessageText.isSelectable = false
     }
     
 }

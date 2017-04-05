@@ -30,7 +30,7 @@ class HomeViewController: ThemedViewController {
         }
     }
     
-    @IBAction func languageButtonTapped(sender: AnyObject) {
+    @IBAction func languageButtonTapped(_ sender: AnyObject) {
         if languageButton.title != "English" {
             languageButton.title = "English"
         } else {
@@ -39,9 +39,9 @@ class HomeViewController: ThemedViewController {
         Text.swapLanguage()
         
         // The text on this view has to be manually updated
-        deliveryButton.setTitle(Text.get("delivery"), forState: UIControlState.Normal)
-        visitorButton.setTitle(Text.get("visitor"), forState: UIControlState.Normal)
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: Text.get("back"), style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        deliveryButton.setTitle(Text.get("delivery"), for: UIControlState())
+        visitorButton.setTitle(Text.get("visitor"), for: UIControlState())
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: Text.get("back"), style: UIBarButtonItemStyle.plain, target: nil, action: nil)
     }
 
 }

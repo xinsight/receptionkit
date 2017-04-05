@@ -11,13 +11,13 @@ import Foundation
 class Messaging {
 
     static func buildRequest() -> NSMutableURLRequest {
-        let url = NSURL(string: "https://hooks.slack.com/services/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")
-        let request = NSMutableURLRequest(URL:url!)
-        request.HTTPMethod = "POST"
+        let url = URL(string: "https://hooks.slack.com/services/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")
+        let request = NSMutableURLRequest(url:url!)
+        request.httpMethod = "POST"
         return request
     }
     
-    static func sendDeliveryMessage(message:String) {
+    static func sendDeliveryMessage(_ message:String) {
 
         let request = buildRequest()
   
@@ -30,14 +30,14 @@ class Messaging {
         ]
 
         do {
-            let json = try NSJSONSerialization.dataWithJSONObject(dict, options: NSJSONWritingOptions.PrettyPrinted);
-            if let jsonString = NSString(data: json, encoding: NSUTF8StringEncoding) {
+            let json = try JSONSerialization.data(withJSONObject: dict, options: JSONSerialization.WritingOptions.prettyPrinted);
+            if let jsonString = NSString(data: json, encoding: String.Encoding.utf8.rawValue) {
                 let payload = "payload=\(jsonString)"
-                request.HTTPBody = payload.dataUsingEncoding(NSUTF8StringEncoding)
+                request.httpBody = payload.data(using: String.Encoding.utf8)
             }
-            
-            let session = NSURLSession.sharedSession()
-            let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
+
+            let session = URLSession.shared
+            let task = session.dataTask(with: request as URLRequest) { data, response, error in
                 if (error != nil) {
                     print("Error: \(error)")
                 }
@@ -51,7 +51,7 @@ class Messaging {
     }
     
     
-    static func sendVisitorMessage(visitorName:String?, contact:Contact?) {
+    static func sendVisitorMessage(_ visitorName:String?, contact:Contact?) {
 
         let text:String
         if let name = visitorName {
@@ -79,14 +79,14 @@ class Messaging {
         ]
         
         do {
-            let json = try NSJSONSerialization.dataWithJSONObject(dict, options: NSJSONWritingOptions.PrettyPrinted);
-            if let jsonString = NSString(data: json, encoding: NSUTF8StringEncoding) {
+            let json = try JSONSerialization.data(withJSONObject: dict, options: JSONSerialization.WritingOptions.prettyPrinted);
+            if let jsonString = NSString(data: json, encoding: String.Encoding.utf8.rawValue) {
                 let payload = "payload=\(jsonString)"
-                request.HTTPBody = payload.dataUsingEncoding(NSUTF8StringEncoding)
+                request.httpBody = payload.data(using: String.Encoding.utf8)
             }
             
-            let session = NSURLSession.sharedSession()
-            let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
+            let session = URLSession.shared
+            let task = session.dataTask(with: request as URLRequest) { data, response, error in
                 if (error != nil) {
                     print("Error: \(error)")
                 }

@@ -22,7 +22,7 @@ class ReceivedMessageViewController: UIViewController {
         super.viewDidLoad()
 
         // Set the text
-        contactTitle.text = name?.uppercaseString
+        contactTitle.text = name?.uppercased()
         contactMessage.text = message
         
         // Set a default image
@@ -32,7 +32,7 @@ class ReceivedMessageViewController: UIViewController {
 
         // Load the image
         if (picture != nil) {
-            NSURLConnection.sendAsynchronousRequest(NSURLRequest(URL: NSURL(string: picture!)!), queue: NSOperationQueue.mainQueue()) { (reponse, data, error) -> Void in
+            NSURLConnection.sendAsynchronousRequest(URLRequest(url: URL(string: picture!)!), queue: OperationQueue.main) { (reponse, data, error) -> Void in
                 self.contactPicture.image = UIImage(data: data!)
             }
         }

@@ -49,7 +49,7 @@ class Text {
     static var language = "English"
     
     // Get text from a key word
-    static func get(text: String) -> String {
+    static func get(_ text: String) -> String {
         if (language == "English") {
             return TextEnglish[text]!
         } else {

@@ -13,7 +13,7 @@ import UIKit
 
 class ReturnToHomeTableViewController: UITableViewController {
 
-    var backToHomeTimer: NSTimer?
+    var backToHomeTimer: Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,17 +22,17 @@ class ReturnToHomeTableViewController: UITableViewController {
         self.view.backgroundColor = UIColor(hex: Config.Colour.Background)
         
         // Set the back button
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: Text.get("back"), style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: Text.get("back"), style: UIBarButtonItemStyle.plain, target: nil, action: nil)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         // Start a timer to return back to the first view
-        backToHomeTimer = NSTimer.scheduledTimerWithTimeInterval(Config.General.Timeout, target: self, selector: #selector(ReturnToHomeTableViewController.unwindToHome(_:)), userInfo: nil, repeats: false)
+        backToHomeTimer = Timer.scheduledTimer(timeInterval: Config.General.Timeout, target: self, selector: #selector(ReturnToHomeTableViewController.unwindToHome(_:)), userInfo: nil, repeats: false)
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         // Delete the timer
@@ -41,8 +41,8 @@ class ReturnToHomeTableViewController: UITableViewController {
     }
     
     // Navigate back to the first view
-    func unwindToHome(timer: NSTimer!) {
-        self.navigationController?.popToRootViewControllerAnimated(true)
+    func unwindToHome(_ timer: Timer!) {
+        _ = self.navigationController?.popToRootViewController(animated: true)
     }
     
 }

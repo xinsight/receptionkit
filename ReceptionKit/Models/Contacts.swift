@@ -19,13 +19,13 @@ class Contacts {
         // completionHandler: ([Contact]) -> Void) -> Void {
         
         let urlString = "https://slack.com/api/users.list?token=\(Config.Slack.TOKEN)"
-        let url = NSURL(string:urlString)
-        let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithURL(url!, completionHandler:{
+        let url = URL(string:urlString)
+        let session = URLSession.shared
+        let task = session.dataTask(with: url!, completionHandler:{
             (data, response, error) -> Void in
             
             do {
-                let dict = try NSJSONSerialization.JSONObjectWithData(data!, options:.AllowFragments) as! NSDictionary
+                let dict = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as! NSDictionary
                 
                 for member:NSDictionary in dict["members"] as! Array {
                     
@@ -37,7 +37,7 @@ class Contacts {
                     let profile = member["profile"] as! NSDictionary
                     let name = profile["real_name"] as! String
                     let username = member["name"] as! String
-                    let avatarUrl = NSURL(string:profile["image_72"] as! String)
+                    let avatarUrl = URL(string:profile["image_72"] as! String)
                     
                     if (name == "") {
                         continue
@@ -50,7 +50,7 @@ class Contacts {
                     
                 }
                 
-                self.items = self.items.sort({$0.name < $1.name})
+                self.items = self.items.sorted(by: {$0.name < $1.name})
                 
             } catch {
                 print("error parsing json")
@@ -70,10 +70,10 @@ class Contact: CustomStringConvertible {
     var name: String // Bob Smith
     var username: String // @slack
     var picture: UIImage?
-    var avatarUrl: NSURL?
+    var avatarUrl: URL?
     var title: String? // profile["title"]
     
-    init(name: String, username: String, avatarUrl:NSURL?) {
+    init(name: String, username: String, avatarUrl:URL?) {
         self.name = name
         self.username = username
         self.avatarUrl = avatarUrl
@@ -84,7 +84,7 @@ class Contact: CustomStringConvertible {
     }
     
     // Search for all contacts that match a name
-    static func search(name: String) -> [Contact] {
+    static func search(_ name: String) -> [Contact] {
         let contacts = [Contact]()
 
         // TODO:

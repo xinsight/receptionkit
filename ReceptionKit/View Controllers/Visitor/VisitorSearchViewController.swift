@@ -22,11 +22,11 @@ class VisitorSearchViewController: ReturnToHomeViewController, UITextFieldDelega
 
         // Do any additional setup after loading the view.
         nameTextField.delegate = self
-        nameTextField.borderStyle = UITextBorderStyle.RoundedRect
+        nameTextField.borderStyle = UITextBorderStyle.roundedRect
         lookingForLabel.text = Text.get("looking for")
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         nameTextField.becomeFirstResponder()
@@ -37,9 +37,9 @@ class VisitorSearchViewController: ReturnToHomeViewController, UITextFieldDelega
     // MARK: - UITextFieldDelegate
     //
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let contacts = appDelegate.contacts
         
         searchResults = contacts.items
@@ -50,7 +50,7 @@ class VisitorSearchViewController: ReturnToHomeViewController, UITextFieldDelega
 
         // Check if the person the visitor is searching for exists
 //        if searchResults.count > 0 {
-            performSegueWithIdentifier("VisitorNameSearchSegue", sender: self)
+            performSegue(withIdentifier: "VisitorNameSearchSegue", sender: self)
 //        } else {
 //            performSegueWithIdentifier("VisitorNameInvalidSearchSegue", sender: self)
 //        }
@@ -65,13 +65,13 @@ class VisitorSearchViewController: ReturnToHomeViewController, UITextFieldDelega
 
     // Post a message if the person the visitor is looking for does not exist
     // Otherwise show the result of the search
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let visitorSearchResultsTableViewController = segue.destinationViewController as? VisitorSearchResultsTableViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let visitorSearchResultsTableViewController = segue.destination as? VisitorSearchResultsTableViewController {
             // Exists
             visitorSearchResultsTableViewController.visitorName = visitorName
             visitorSearchResultsTableViewController.searchQuery = nameTextField.text
             visitorSearchResultsTableViewController.searchResults = searchResults
-        } else if let waitingViewController = segue.destinationViewController as? WaitingViewController {
+        } else if let waitingViewController = segue.destination as? WaitingViewController {
             // Does not exist
             print("???")
 //            if visitorName == nil || visitorName == "" {

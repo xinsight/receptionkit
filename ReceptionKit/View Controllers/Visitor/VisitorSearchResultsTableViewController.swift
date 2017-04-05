@@ -18,9 +18,9 @@ class VisitorSearchResultsTableViewController: ReturnToHomeTableViewController {
         super.viewDidLoad()
         
         // Overwrite the theme - table should be white
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.white
         
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         searchResults = appDelegate.contacts.items
 
     }
@@ -29,16 +29,16 @@ class VisitorSearchResultsTableViewController: ReturnToHomeTableViewController {
     // MARK: - Table view data source
     //
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchResults!.count ?? 0
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return searchResults?.count ?? 0
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> ContactTableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("contactCell", forIndexPath: indexPath) as! ContactTableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> ContactTableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "contactCell", for: indexPath) as! ContactTableViewCell
 
         let contact = searchResults![indexPath.row]
         cell.contactNameLabel.text = contact.name
@@ -50,10 +50,10 @@ class VisitorSearchResultsTableViewController: ReturnToHomeTableViewController {
             
             if let url = contact.avatarUrl {
             
-                let session = NSURLSession.sharedSession()
-                let task = session.dataTaskWithURL(url, completionHandler: { (data, response, error) -> Void in
+                let session = URLSession.shared
+                let task = session.dataTask(with: url, completionHandler: { (data, response, error) -> Void in
                     if let _data = data {
-                        dispatch_async(dispatch_get_main_queue(), {
+                        DispatchQueue.main.async(execute: {
                             cell.contactImage.image = UIImage(data:_data)
                         })
                     }
@@ -70,12 +70,12 @@ class VisitorSearchResultsTableViewController: ReturnToHomeTableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let contact = searchResults![indexPath.row]
         
         Messaging.sendVisitorMessage(visitorName, contact: contact)
         
-        performSegueWithIdentifier("SelectedContact", sender: self)
+        performSegue(withIdentifier: "SelectedContact", sender: self)
     }
     
 
